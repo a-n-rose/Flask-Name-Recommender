@@ -1,6 +1,5 @@
-from flask import Flask, request, render_template, flash, url_for, redirect, session, json, g, jsonify, abort, g
-from flask_login import LoginManager,login_user , logout_user , current_user , login_required
-from flask_user import login_required, UserManager, UserMixin, SQLAlchemyAdapter
+from flask import Flask, request, render_template, flash, url_for, redirect, session, jsonify, g
+from flask_login import LoginManager , login_required
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import *
 from sqlalchemy import DateTime, Column, Integer, String, create_engine, Sequence, text, MetaData, Table, inspect, ForeignKey
