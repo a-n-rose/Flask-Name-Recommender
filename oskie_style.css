@@ -1,0 +1,94 @@
+body {
+    background-color: rgb(185,185,185);
+}
+p {
+  color: rgb(0,0,40);
+  text-align: center;
+}
+
+h1 {
+  text-align: center;
+  color: rgb(0,0,40);
+}
+h2 {
+  text-align: center;
+  color: rgb(0,0,40); 
+}
+h3 {
+  text-align: center;
+  color: rgb(0,0,40); 
+}
+h4 {
+  text-align: left;
+  color: rgb(0,0,40)
+}
+h5 {
+  text-align: left;
+  color: rgb(0,0,40)
+}
+h6 {
+  text-align: left;
+  color: rgb(0,0,40)
+}
+
+
+table {
+    text-align: left;
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgb(0,0,40);
+}
+
+.boxdiv {
+  /*A blue box with rounded corners div*/
+  background-color: rgb(150,23,45);
+  border: solid;
+  border-width: 1px;
+  border-color: rgb(150,23,45);
+  margin: 0px 2px 15px 2px;
+  padding: 0px 17px 5px 17px;
+  border-radius: 25px;
+  font-family: Verdana, Geneva, sans-serif;
+}
+table {
+  /*puts table in the center of the page*/
+  margin: auto;
+}
+.tablediv {
+  /*A blue div that covers the full widith of the page*/
+  background-color: rgb(185,5,35);
+  margin: auto;
+  width: 100%;
+  margin: 0px 0px 0px -9px;
+  padding: 2px 9px 0px 0px;
+  color: GhostWhite;
+  font-family: Verdana, Geneva, sans-serif;
+}
+
+img {
+  display: inline-block;
+  width: 200px;
+  border: solid;
+  border-width: 2px;
+  border-color: GhostWhite;
+  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.trips2015 {
+  color: rgb(15,200,200);
+}
+.trips2016 {
+  color: rgb(200,200,10);
+}
+.trips2017 {
+  color: rgb(50,550,50);
+}
+
+@media (min-width: 768px) {
+  .navbar-header {
+    float: auto;
+  }
+
+
