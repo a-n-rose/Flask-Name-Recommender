@@ -1,0 +1,127 @@
+{% extends "bbnmheader.html" %}
+{% block title %}Rate Names: {% endblock title %}
+{% block body %}
+
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class = "container">
+        <br>
+        <br>     
+    {% if namelist %}       
+        <h3>How you like these names?</h3>
+        <p id=babyname></p>
+        <a href=# id=rating_like><button name=like class="btn btn-success" value=1 >Like</button></a>
+        <a href=# id=rating_dislike><button name=dislike class="btn btn-danger" value=0 >Dislike</button></a>
+        <a href=# id=save_name><button name=save class= "btn btn-warning"><span class="glyphicon glyphicon-star"></span></button></a>
+        <p id=result><h3></h3></p>
+        <div>
+        <a href=# id=stop_rating><button name=stop class= "btn btn-default">Stop and Save Ratings</button></a>
+        </div>
+    {% else %}
+        <h3>Congratulations!</h3>
+        <h4>You have rated all the names we have. We hope you collected some great names. Feel free to start a new search!</h4>
+    {% endif %}
+    
+    
+<script type=text/javascript>    
+    function stop_rating(namerating_dict,saved_names) {
+        var message = "Thanks for rating! Your work has been saved.";
+        var search_name = "{{ search_name|safe }}";
+        $.ajax({
+            url: "{{ url_for('_ratednames') }}",
+            type: "POST",
+            data: JSON.stringify({names_ratings: namerating_dict,search_name: search_name, saved_names: saved_names},null,'\t'),
+            contentType: 'application/json;charset=UTF-8',
+            }, function(data) {
+                $("#result").text(data.result);
+            });
+        document.getElementById("babyname").innerHTML='<h2><b>'+ message + '</b></h2>';
+    };
+    function finished(namerating_dict,saved_names) {
+        var message = "Congratulations! You've rated all the names we've got. Hope you found some you like!";
+        $.ajax({
+            url: "{{ url_for('_ratednames') }}",
+            type: "POST",
+            data: JSON.stringify({names_ratings: namerating_dict,search_name: search_name, saved_names: saved_names},null,'\t'),
+            contentType: 'application/json;charset=UTF-8',
+            }, function(data) {
+                $("#result").text(data.result);
+            });
+        document.getElementById("babyname").innerHTML='<h2><b>'+ message + '</b></h2>';
+    };
+    function ratename(x) {
+        name=namelist[x];
+        x = Number(x);
+        x += 1;
+        if (x < namelist_length) {
+            x = x.toString();
+            $(function() {
+            document.getElementById("babyname").innerHTML='<h2><b>'+ name+ '</b></h2>';
+            });
+            $(function() {
+                $('a#rating_like').off('click').on('click', function(e) {
+                    
+                    namerating_dict[name] = $('button[name="like"]').val();
+//                     alert($('button[name="like"]').val())
+                    return ratename(x);
+                    
+                });
+                $('a#rating_dislike').off('click').on('click', function(e) {
+                                  
+                    namerating_dict[name] = $('button[name="dislike"]').val(); 
+//                     alert($('button[name="dislike"]').val())
+                    return ratename(x);
+                    
+                });
+                $('a#save_name').off('click').on('click', function(e) {
+                    saved_names[name] = '1';
+                });
+                $('a#stop_rating').on('click', function(e) {
+                    return stop_rating(namerating_dict,saved_names);
+                });
+            });
+        }
+        else {
+            $(function() {
+            document.getElementById("babyname").innerHTML='<h2><b>'+ name + '</b></h2>';
+            });
+            $(function() {
+                $('a#rating_like').off('click').on('click', function(e) {
+                    
+                    namerating_dict[name] = $('button[name="like"]').val();
+                    return finished(namerating_dict,saved_names);
+                    
+                });
+                $('a#rating_dislike').off('click').on('click', function(e) {
+                    
+                    namerating_dict[name] = $('button[name="dislike"]').val();
+                    return finished(namerating_dict,saved_names);
+                    
+                });
+                $('a#save_name').off('click').on('click', function(e) {
+                    saved_names[name] = '1';
+                });
+                $('a#stop_rating').on('click', function(e) {
+                    return stop_rating(namerating_dict,saved_names);
+                });
+            });
+        }
+    };
+
+var namerating_dict = {}; 
+var namelist = {{namelist|safe}};
+var namelist_length = Object.keys(namelist).length;
+var name="";
+var x = '0';
+var saved_names = {};
+// var saved_names = "";
+ratename(x);
+</script> 
+</div>
+    
+</body>
+
+{% endblock %}

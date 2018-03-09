@@ -1,0 +1,14 @@
+{% extends "bbnmheader.html" %}
+{% block title %}Home: {% endblock title %}
+{% block body %}
+
+<br>
+<body>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href={{ url_for('static', filename='oskie_style.css')}} >
+    <h1> Welcome {{ username }} to the baby name retriever website </h1>
+    <h2> We use machine learning to decipher which names from thousands you might like! The more names you rate, the better our recommendations will be. Have fun! </h2>
+
+</body>
+
+{% endblock %} 

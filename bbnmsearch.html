@@ -1,0 +1,54 @@
+{% extends "bbnmheader.html" %}
+{% block title %}Your Searches: {% endblock title %}
+{% block body %}
+<br>
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+<div class="container">
+<br>
+<h2>Your Searches:</h2>
+<br>
+{% if searchlist %}
+    <div>
+    <form action='' method = post>
+        {% for search in searchlist %}
+            <button type = submit name ="search_name" value = "{{search[0]}}">{{search[1]}}</button>
+            <p>{{search[2]}} </p>
+        {% endfor %}
+    </form>
+    </div>
+{% else %}
+    <div>
+        <h4>You haven't started a search yet</h4>
+    </div>
+{% endif %}
+<br>
+<br>
+
+<div>
+<form action="/new_search" method=post role ="form" class="form-horizontal">
+    <h4>Start a new search</h4>
+    <div class="control-group">
+        <div class = "controls">
+            <input type="text" id="usr_search_name" name="usr_search_name" class="input-xlarge" placeholder="Search Name" value ="{{ request.form.usr_search_name }}">
+        </div>
+        <div class = "controls">
+            <input type="text" id="search_description" name="search_description" class="input-xlarge" placeholder="What is the search for?" value ="{{ request.form.search_description }}">
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <button type="submit" name="submit" class="btn btn-success">Submit</button>
+        </div>
+    </div>
+</form>
+</div>
+{% if error %}
+    <br>
+    <p class="error"><h4><strong>Error: </strong>{{error}}</h4> </p>
+    <br>
+{% endif %}
+</body>
+{% endblock %}

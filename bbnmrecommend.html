@@ -1,0 +1,34 @@
+{% extends "bbnmheader.html" %}
+{% block title %}Recommended Names: {% endblock title %}
+{% block body %}
+
+
+<br>
+<body>
+<div class="container">
+<br>
+<h2>Your Recommended Names:</h2>
+<br>
+{% if recommendlist %}
+    {% for pair in recommendlist %}
+
+        <h3>{{ pair[0] }}</h3>
+        {% for name in pair[1] %}
+            <h5><b>{{name[1]}}</b></h5>
+        {% endfor %}
+    {% endfor %}
+
+{% else %}
+    <div>
+        <h4>You haven't rated any names yet</h4>
+    </div>
+{% endif %}
+
+{% if error %}
+    <br>
+    <p class="error"><h4><strong>Error: </strong>{{error}}</h4> </p>
+    <br>
+{% endif %}
+
+</body>
+{% endblock %}

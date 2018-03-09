@@ -1,0 +1,30 @@
+{% extends "bbnmheader.html" %}
+{% block title %}Your Saved Names: {% endblock title %}
+{% block body %}
+<br>
+<body>
+<div class="container">
+<br>
+<h2>Your Saved Names:</h2>
+<br>
+{% if search_savedlist %}
+    {% for pair in search_savedlist %}
+        <h3>{{ pair[0] }}</h3>
+        {% for name in pair[1] %}
+            <h5>{{name}}</h5>
+        {% endfor %}
+    {% endfor %}
+{% else %}
+    <div>
+        <h4>You haven't starred any names yet</h4>
+    </div>
+{% endif %}
+
+{% if error %}
+    <br>
+    <p class="error"><h4><strong>Error: </strong>{{error}}</h4> </p>
+    <br>
+{% endif %}
+
+</body>
+{% endblock %}

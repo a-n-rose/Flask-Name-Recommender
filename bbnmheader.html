@@ -1,0 +1,69 @@
+<!doctype html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href={{url_for('static', filename='oskie_style.css.css')}} >
+<html lang="en">
+<head>
+{% block head %}
+    <meta charset="utf=8">
+    <title>{% block title %}{% endblock %}Baby Name Retriever</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/babyfeet.ico') }}" >
+{% endblock %}
+</head>
+
+
+<header>
+{% block header %}
+
+    <div class="header">
+        <a class="header" href="/">
+        {% block a %}
+        <img style="display: inline-block; margin: 0 auto; width: 100px; margin-top: -7px;" src="{{ url_for('static', filename='images/babyfeet.png') }}" >
+        {% endblock %}
+        </a>
+    </div>    
+    {% if session.logged_in %}
+    <div class="navbar-header">
+        <a href="/searches"><button type="button" class="btn btn-danger" aria-label="Left Align" style="margin-top: 5px; margin-bottom: 5px; height: 44px; margin-right: 15px">
+            <span class="glyphicon glyphicon-certificate" aria-hidden="true"></span>Your Searches
+        </button></a>
+        <a href="/recommendations"><button type="button" class="btn btn-danger" aria-label="Left Align" style="margin-top: 5px; margin-bottom: 5px; height: 44px; margin-right: 15px">
+            <span class="glyphicon glyphicon-certificate" aria-hidden="true"></span>Our Recommendations
+        </button></a>
+        <a href="/savednames"><button type="button" class="btn btn-danger" aria-label="Left Align" style="margin-top: 5px; margin-bottom: 5px; height: 44px; margin-right: 15px">
+            <span class="glyphicon glyphicon-certificate" aria-hidden="true"></span> Saved Names
+        </button></a>
+        <a href="/logout"><button type="button" class="btn btn-danger" aria-label="Left Align" style="margin-top: 5px; margin-bottom: 5px; height: 44px; margin-right: 15px">
+            <span class="glyphicon glyphicon-certificate" aria-hidden="true"></span> Logout
+        </button></a>
+    </div>
+    {% else %}
+    <div class="navbar-header">
+        <a href="/login"><button type="button" class="btn btn-danger" aria-label="Left Align" style="margin-top: 5px; margin-bottom: 5px; height: 44px; margin-right: 15px">
+            <span class="glyphicon glyphicon-certificate" aria-hidden="true"></span> Login
+        </button></a>
+        <a href="/register"><button type="button" class="btn btn-danger" aria-label="Left Align" style="margin-top: 5px; margin-bottom: 5px; height: 44px; margin-right: 15px">
+            <span class="glyphicon glyphicon-certificate" aria-hidden="true"></span> Register
+        </button></a>
+    </div>
+    {% endif %}
+{% endblock %}
+</header>
+
+<body>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class = "alert alert-warning" alert-dismissible" role="alert">
+{{message}}
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+{% block body %}
+{% endblock %}
+</body>
+
+
+</html>
